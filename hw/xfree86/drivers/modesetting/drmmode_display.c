@@ -37,6 +37,7 @@
 #include "dumb_bo.h"
 #include "xf86str.h"
 #include "X11/Xatom.h"
+#include "mi.h"
 #include "micmap.h"
 #include "xf86cmap.h"
 #include "xf86DDC.h"
@@ -3767,7 +3768,7 @@ drmmode_handle_uevents(int fd, void *closure)
         goto out;
 
     if (mode_res->count_crtcs != config->num_crtc) {
-        ErrorF("number of CRTCs changed - failed to handle, %d vs %d\n", mode_res->count_crtcs, config->num_crtc);
+        /* this triggers with Zaphod mode where we don't currently support connector hotplug or MST. */
         goto out_free_res;
     }
 
@@ -3816,15 +3817,16 @@ drmmode_handle_uevents(int fd, void *closure)
         drmmode_output_init(scrn, drmmode, mode_res, i, TRUE, 0);
     }
 
-    /* Check to see if a lessee has disappeared */
-    drmmode_validate_leases(scrn);
-
     if (changed) {
         RRSetChanged(xf86ScrnToScreen(scrn));
         RRTellChanged(xf86ScrnToScreen(scrn));
     }
 
 out_free_res:
+
+    /* Check to see if a lessee has disappeared */
+    drmmode_validate_leases(scrn);
+
     drmModeFreeResources(mode_res);
 out:
     RRGetInfo(xf86ScrnToScreen(scrn), TRUE);

@@ -54,6 +54,7 @@ typedef enum {
     OPTION_DOUBLE_SHADOW,
     OPTION_FLIP_FB,
     OPTION_NO_EDID,
+    OPTION_ATOMIC,
 } modesettingOpts;
 
 typedef struct

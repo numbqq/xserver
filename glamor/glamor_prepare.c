@@ -146,6 +146,8 @@ glamor_prep_pixmap_box(PixmapPtr pixmap, glamor_access_t access, BoxPtr box)
     glamor_download_boxes(pixmap, RegionRects(&region), RegionNumRects(&region),
                           0, 0, 0, 0, pixmap->devPrivate.ptr, pixmap->devKind);
 
+    RegionUninit(&region);
+
     if (priv->pbo) {
         if (priv->map_access == GLAMOR_ACCESS_RW)
             gl_access = GL_READ_WRITE;

@@ -2659,7 +2659,7 @@ GetPairedDevice(DeviceIntPtr dev)
     if (!IsMaster(dev) && !IsFloating(dev))
         dev = GetMaster(dev, MASTER_ATTACHED);
 
-    return dev->spriteInfo->paired;
+    return dev->spriteInfo? dev->spriteInfo->paired: NULL;
 }
 
 /**
