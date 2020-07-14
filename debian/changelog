@@ -1,3 +1,10 @@
+xorg-server (2:1.20.8-100ubuntu1~focal1) UNRELEASED; urgency=medium
+
+  * apply rockchip patches
+  * bump version
+
+ -- Nick Xie <nick@khadas.com>  Tue, 14 Jul 2020 13:55:29 +0800
+
 xorg-server (2:1.20.8-2) unstable; urgency=medium
 
   * rules: Exclude udeb/ from indep dh_missing. (Closes: #955399)
